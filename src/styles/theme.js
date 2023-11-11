@@ -25,5 +25,6 @@ export default {
     Mint: '#04d361',
     Cake100: '#82f3ff',
     Cake200: '#065e7c',
+    GRADIENTE100: '#091E26',
   },
 }

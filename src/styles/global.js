@@ -15,7 +15,7 @@ export default createGlobalStyle`
     font-family: 'Roboto', sans-serif;
     font-size: 1.6rem;
 
-    background-color: ${({ theme }) => theme.COLORS.Dark400};
+    background-color: ${({ theme }) => theme.COLORS.Dark700};
     color: ${({ theme }) => theme.COLORS.Light100};
   }
 
