@@ -25,12 +25,6 @@ export const Container = styled.div`
     }
   }
 
-  @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
-    > h1 {
-      margin-bottom: 15rem;
-    }
-  }
-
   @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
     flex-direction: row;
     justify-content: space-around;
@@ -85,7 +79,7 @@ export const Form = styled.form`
     color: ${({ theme }) => theme.COLORS.Light100};
   }
 
-  @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
+  @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
     width: 47.6rem;
 
     padding: 6.4rem;
