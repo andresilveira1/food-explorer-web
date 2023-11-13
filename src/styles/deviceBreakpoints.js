@@ -1,7 +1,8 @@
 export const DEVICE_BREAKPOINTS = {
-  XS: '320px',
+  US: '320px',
+  XS: '375px',
   SM: '425px',
   MD: '768px',
-  LG: '1024px',
-  XL: '1280px',
+  LG: '990px',
+  XL: '1200px',
 }
