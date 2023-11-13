@@ -19,13 +19,21 @@ export function SignIn() {
         <label htmlFor="email">
           <span>Email</span>
 
-          <Input id="email" placeholder="Exemplo: exemplo@exemplo.com.br" />
+          <Input
+            id="email"
+            type="email"
+            placeholder="Exemplo: exemplo@exemplo.com.br"
+          />
         </label>
 
         <label htmlFor="password">
           <span>Senha</span>
 
-          <Input id="password" placeholder="No mínimo 6 caracteres" />
+          <Input
+            id="password"
+            type="password"
+            placeholder="No mínimo 6 caracteres"
+          />
         </label>
 
         <Button type="submit" title="Entrar" />
