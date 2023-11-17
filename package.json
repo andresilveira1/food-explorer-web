@@ -5,13 +5,16 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint src --ext js,ts,jsx,tsx --fix",
+    "style-build": "style-dictionary build",
+    "lint": "eslint src --ext js,jsx --fix",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@phosphor-icons/react": "^2.0.14",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "styled-components": "^6.1.1",
+    "swiper": "^11.0.4"
   },
   "devDependencies": {
     "@rocketseat/eslint-config": "^2.1.0",
