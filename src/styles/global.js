@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import { DEVICE_BREAKPOINTS } from './deviceBreakpoints'
 
 export default createGlobalStyle`
   * {
@@ -9,6 +10,10 @@ export default createGlobalStyle`
 
   :root {
     font-size: 62.5%;
+  }
+
+  ul {
+    list-style: none;
   }
 
   body {
@@ -30,5 +35,23 @@ export default createGlobalStyle`
 
   button:hover, a:hover {
     filter: brigntness(0.9);
+  }
+
+  ::-webkit-scrollbar {
+    width: 1rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: ${({ theme }) => theme.COLORS.Dark700};
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.COLORS.Dark100};
+  }
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    ::-webkit-scrollbar {
+    width: 0;
+  }
   }
 `
