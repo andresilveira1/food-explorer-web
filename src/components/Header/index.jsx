@@ -17,6 +17,7 @@ export function Header({ onOpenMenu }) {
       <Menu onClick={onOpenMenu}>
         <List size={24} />
       </Menu>
+
       <h1>
         <Hexagon size={30} weight="fill" />
         food explorer

@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints'
 
 export const Container = styled.aside`
   display: grid;
@@ -14,7 +13,7 @@ export const Container = styled.aside`
   height: 100vh;
 
   position: absolute;
-  z-index: 1;
+  z-index: 100;
 
   background-color: ${({ theme }) => theme.COLORS.Dark700};
 
@@ -23,6 +22,8 @@ export const Container = styled.aside`
 
   &[data-menu-is-open='true'] {
     transform: translateY(0);
+
+    position: fixed;
   }
 `
 

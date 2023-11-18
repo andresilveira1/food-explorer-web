@@ -8,9 +8,12 @@ export const Container = styled.header`
   align-items: center;
   justify-content: space-between;
 
-  padding: 6.4rem 2.8rem 3.2rem;
-
+  padding: 5.6rem 2.8rem 2.4rem;
   background-color: ${({ theme }) => theme.COLORS.Dark500};
+
+  position: fixed;
+
+  width: 100%;
 
   > h1 {
     display: flex;
@@ -36,6 +39,8 @@ export const Container = styled.header`
     padding: 0 5rem;
 
     gap: 2rem;
+
+    height: 10.4rem;
 
     > div {
       display: flex;
