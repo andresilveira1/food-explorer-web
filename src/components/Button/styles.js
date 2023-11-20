@@ -8,6 +8,9 @@ export const Container = styled.button`
   border: 0;
   border-radius: 0.5rem;
 
+  flex: 1;
+  max-width: 21.6rem;
+
   background-color: ${({ theme }) => theme.COLORS.Tomato400};
   color: ${({ theme }) => theme.COLORS.Light100};
 

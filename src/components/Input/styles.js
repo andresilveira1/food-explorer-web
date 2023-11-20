@@ -1,9 +1,9 @@
 import styled from 'styled-components'
-import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints'
 
 export const Container = styled.div`
-  width: 50%;
+  max-width: 58.1rem;
   height: 4.8rem;
+  flex: 1;
 
   display: flex;
   align-items: center;
@@ -26,9 +26,5 @@ export const Container = styled.div`
     &:placeholder {
       color: ${({ theme }) => theme.COLORS.Light500};
     }
-  }
-
-  @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
-    width: 58.1rem;
   }
 `
