@@ -3,7 +3,7 @@ import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints'
 
 export const Container = styled.div`
   display: grid;
-  grid-template-rows: 11.4rem auto 7.7rem;
+  grid-template-rows: 10.4rem auto 7.7rem;
   grid-template-areas:
     'header'
     'content'
@@ -46,16 +46,18 @@ export const Main = styled.main`
   }
 
   @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+    max-width: 112rem;
+
+    padding: 0 5rem;
+
+    > button {
+      margin-left: 0rem;
+      margin-top: 2.4rem;
+    }
   }
 
   @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
-    max-width: 136.8rem;
-
-    margin: 0 auto;
-
-    > button {
-      margin-top: 2.4rem;
-    }
+    padding: 0;
   }
 `
 
@@ -97,10 +99,6 @@ export const Product = styled.div`
   }
 
   @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
-    > button {
-      margin-left: 10rem;
-    }
-
     > img {
       display: block;
 
@@ -111,12 +109,6 @@ export const Product = styled.div`
 
     > div {
       ul {
-        display: flex;
-        justify-content: center;
-
-        flex-wrap: wrap;
-        gap: 2.4rem;
-
         margin: 0 2.55rem 4.8rem;
       }
     }
@@ -152,6 +144,7 @@ export const Product = styled.div`
 
       ul {
         margin: 0;
+        gap: 1.2rem;
       }
     }
   }

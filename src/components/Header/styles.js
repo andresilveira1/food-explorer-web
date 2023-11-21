@@ -111,7 +111,11 @@ export const Menu = styled.button`
     color: ${({ theme }) => theme.COLORS.Light100};
   }
 
-  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+  @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
     display: block;
+  }
+
+  @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+    display: none;
   }
 `
