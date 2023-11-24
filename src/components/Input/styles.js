@@ -9,12 +9,12 @@ export const Container = styled.div`
   align-items: center;
   gap: 0.4rem;
 
-  background-color: ${({ theme }) => theme.COLORS.Dark200};
   color: ${({ theme }) => theme.COLORS.Light400};
 
   > input {
     width: 100%;
-    background-color: transparent;
+
+    background: ${({ theme }) => theme.COLORS.Dark200};
 
     font-family: 'Roboto', sans-serif;
     font-size: 1.6rem;
@@ -23,7 +23,7 @@ export const Container = styled.div`
     border: none;
     outline: none;
 
-    &:placeholder {
+    &::placeholder {
       color: ${({ theme }) => theme.COLORS.Light500};
     }
   }

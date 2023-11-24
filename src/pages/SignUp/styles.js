@@ -52,15 +52,16 @@ export const Form = styled.form`
   }
 
   > label {
-    span {
-      color: ${({ theme }) => theme.COLORS.Light400};
-    }
+    color: ${({ theme }) => theme.COLORS.Light400};
+  }
 
-    div {
-      width: 100%;
+  > div {
+    width: 100%;
 
-      padding: 0 1.4rem;
-      margin: 0.8rem 0 3.2rem 0;
+    margin: 0.8rem 0 3.2rem 0;
+
+    input {
+      padding: 1.6rem;
 
       border-radius: 0.8rem;
     }

@@ -35,6 +35,10 @@ export const Container = styled.header`
     display: none;
   }
 
+  > button {
+    max-width: 21.6rem;
+  }
+
   @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
     padding: 0 5rem;
 
@@ -105,7 +109,6 @@ export const Logout = styled.button`
 export const Menu = styled.button`
   background: none;
   border: none;
-  display: none;
 
   > svg {
     color: ${({ theme }) => theme.COLORS.Light100};
