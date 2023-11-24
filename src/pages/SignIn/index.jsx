@@ -1,6 +1,6 @@
-import { Container, Form } from './styles'
-
 import { Hexagon } from '@phosphor-icons/react'
+import { Container, Form } from './styles'
+import { Link } from 'react-router-dom'
 
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
@@ -16,29 +16,19 @@ export function SignIn() {
       <Form>
         <h2>Faça Login</h2>
 
-        <label htmlFor="email">
-          <span>Email</span>
+        <label htmlFor="email">Email</label>
+        <Input id="email" type="email" placeholder="exemplo@exemplo.com.br" />
 
-          <Input
-            id="email"
-            type="email"
-            placeholder="Exemplo: exemplo@exemplo.com.br"
-          />
-        </label>
-
-        <label htmlFor="password">
-          <span>Senha</span>
-
-          <Input
-            id="password"
-            type="password"
-            placeholder="No mínimo 6 caracteres"
-          />
-        </label>
+        <label htmlFor="password">Senha</label>
+        <Input
+          id="password"
+          type="password"
+          placeholder="No mínimo 6 caracteres"
+        />
 
         <Button type="submit" title="Entrar" />
 
-        <a href="#">Criar uma conta</a>
+        <Link to="/signup">Criar uma conta</Link>
       </Form>
     </Container>
   )

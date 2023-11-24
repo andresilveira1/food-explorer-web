@@ -1,5 +1,6 @@
 import { Hexagon } from '@phosphor-icons/react'
 import { Container, Form } from './styles'
+import { Link } from 'react-router-dom'
 
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
@@ -15,35 +16,22 @@ export function SignUp() {
       <Form>
         <h2>Crie sua conta</h2>
 
-        <label htmlFor="name">
-          <span>Seu nome</span>
+        <label htmlFor="name">Seu nome</label>
+        <Input id="name" placeholder="Exemplo: Maria da Silva" />
 
-          <Input id="name" placeholder="Exemplo: Maria da Silva" />
-        </label>
+        <label htmlFor="email">Email</label>
+        <Input id="email" type="email" placeholder="exemplo@exemplo.com.br" />
 
-        <label htmlFor="email">
-          <span>Email</span>
-
-          <Input
-            id="email"
-            type="email"
-            placeholder="Exemplo: exemplo@exemplo.com.br"
-          />
-        </label>
-
-        <label htmlFor="password">
-          <span>Senha</span>
-
-          <Input
-            id="password"
-            type="password"
-            placeholder="No mínimo 6 caracteres"
-          />
-        </label>
+        <label htmlFor="password">Senha</label>
+        <Input
+          id="password"
+          type="password"
+          placeholder="No mínimo 6 caracteres"
+        />
 
         <Button type="submit" title="Entrar" />
 
-        <a href="#">Já tenho uma conta</a>
+        <Link to="/">Já tenho uma conta</Link>
       </Form>
     </Container>
   )
