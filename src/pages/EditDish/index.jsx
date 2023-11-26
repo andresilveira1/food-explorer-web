@@ -2,15 +2,15 @@ import { CaretLeft, UploadSimple } from '@phosphor-icons/react'
 
 import { Container, Form } from './styles'
 
+import { Button } from '../../components/Button'
+import { DishItem } from '../../components/DishItem'
 import { Header } from '../../components/Header'
 import { Input } from '../../components/Input'
-import { Footer } from '../../components/Footer'
-import { Button } from '../../components/Button'
-import { Textarea } from '../../components/Textarea'
 import { Select } from '../../components/Select'
-import { DishItem } from '../../components/DishItem'
+import { Textarea } from '../../components/Textarea'
+import { Footer } from '../../components/Footer'
 
-export function NewDish() {
+export function EditDish() {
   return (
     <Container>
       <Header />
@@ -22,7 +22,7 @@ export function NewDish() {
             voltar
           </a>
 
-          <h2>Novo prato</h2>
+          <h2>Editar prato</h2>
         </div>
 
         <Form>
@@ -49,7 +49,7 @@ export function NewDish() {
           <div>
             <label htmlFor="ingredients">Ingredientes</label>
 
-            <div className="dishitem">
+            <div className="dish-item">
               <DishItem value="Pão Naan" />
 
               <DishItem isNew placeholder="Adicionar" />
@@ -69,7 +69,18 @@ export function NewDish() {
             />
           </div>
 
-          <Button className="button" type="submit" title="Salvar" />
+          <div className="button-wrapper">
+            <Button
+              className="button-remove"
+              type="button"
+              title="Excluir prato"
+            />
+            <Button
+              className="button-save"
+              type="submit"
+              title="Salvar alterações"
+            />
+          </div>
         </Form>
       </div>
 

@@ -77,6 +77,8 @@ export const Form = styled.form`
   flex-direction: column;
   gap: 2.4rem;
 
+  justify-content: end;
+
   > div {
     display: flex;
     flex-direction: column;
@@ -136,7 +138,7 @@ export const Form = styled.form`
     border-width: 0;
   }
 
-  .dishitem {
+  .dish-item {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -149,15 +151,30 @@ export const Form = styled.form`
     background: ${({ theme }) => theme.COLORS.Dark300};
   }
 
-  .button {
+  .button-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 3.2rem;
+
+    margin-bottom: 5.3rem;
+  }
+
+  .button-save,
+  .button-remove {
+    width: max-content;
+    padding: 1.2rem 0;
+
     font-family: 'Poppins', sans-serif;
     font-size: 1.4rem;
-    font-weight: 500;
+    font-weight: 400;
+  }
 
-    padding: 1.2rem 0;
-    margin-bottom: 5.3rem;
-
+  .button-save {
     background: ${({ theme }) => theme.COLORS.Tomato100};
+  }
+
+  .button-remove {
+    background: ${({ theme }) => theme.COLORS.Dark300};
   }
 
   @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
@@ -194,8 +211,12 @@ export const Form = styled.form`
       width: 100%;
     }
 
-    .button {
-      margin-left: 94rem;
+    .button-save {
+      width: 17.2rem;
+    }
+
+    .button-remove {
+      width: 13.5rem;
     }
   }
 `
