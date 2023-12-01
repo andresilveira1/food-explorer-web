@@ -1,11 +1,22 @@
 import { Hexagon } from '@phosphor-icons/react'
-import { Container, Form } from './styles'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 
+import { useAuth } from '../../hooks/auth'
+import { Container, Form } from './styles'
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
 
 export function SignIn() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const { signIn } = useAuth()
+
+  function handleSignIn() {
+    signIn({ email, password })
+  }
+
   return (
     <Container>
       <h1>
@@ -17,16 +28,23 @@ export function SignIn() {
         <h2>Faça Login</h2>
 
         <label htmlFor="email">Email</label>
-        <Input id="email" type="email" placeholder="exemplo@exemplo.com.br" />
+        <Input
+          id="email"
+          type="email"
+          placeholder="exemplo@exemplo.com.br"
+          onChange={(e) => setEmail(e.target.value)}
+          autoComplete="on"
+        />
 
         <label htmlFor="password">Senha</label>
         <Input
           id="password"
           type="password"
           placeholder="No mínimo 6 caracteres"
+          onChange={(e) => setPassword(e.target.value)}
         />
 
-        <Button type="submit" title="Entrar" />
+        <Button title="Entrar" onClick={handleSignIn} />
 
         <Link to="/signup">Criar uma conta</Link>
       </Form>
