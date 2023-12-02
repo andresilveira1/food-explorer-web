@@ -2,17 +2,13 @@ import * as SelectPrimitive from '@radix-ui/react-select'
 import { CaretDown } from '@phosphor-icons/react'
 
 import { Container } from './styles'
-import { SelectItem } from './SelectItem'
 
-export function Select() {
+export function Select({ children, placeholder, ...rest }) {
   return (
     <Container>
-      <SelectPrimitive.Root className="primitive">
+      <SelectPrimitive.Root className="primitive" {...rest}>
         <SelectPrimitive.Trigger className="trigger">
-          <SelectPrimitive.Value
-            className="value"
-            placeholder="Selecione uma categoria"
-          />
+          <SelectPrimitive.Value className="value" placeholder={placeholder} />
           <SelectPrimitive.Icon>
             <CaretDown className="icon" />
           </SelectPrimitive.Icon>
@@ -26,7 +22,7 @@ export function Select() {
             className="selectContent"
           >
             <SelectPrimitive.Viewport className="selectView">
-              <SelectItem />
+              {children}
             </SelectPrimitive.Viewport>
           </SelectPrimitive.Content>
         </SelectPrimitive.Portal>
