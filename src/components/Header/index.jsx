@@ -10,8 +10,15 @@ import { Container, Logout, Menu } from './styles'
 
 import { Button } from '../Button'
 import { Input } from '../Input'
+import { useAuth } from '../../hooks/auth'
 
 export function Header({ onOpenMenu }) {
+  const { signOut } = useAuth()
+
+  function handleSignOut() {
+    signOut()
+  }
+
   return (
     <Container>
       <Menu onClick={onOpenMenu}>
@@ -21,6 +28,7 @@ export function Header({ onOpenMenu }) {
       <h1>
         <Hexagon size={30} weight="fill" />
         food explorer
+        {/* {user.isAdmin && <span>admin</span>} */}
       </h1>
 
       <Input
@@ -31,7 +39,7 @@ export function Header({ onOpenMenu }) {
       <Button title="Pedidos" icon={Receipt} className="request-button" />
 
       <Logout>
-        <SignOut size={32} />
+        <SignOut size={32} onClick={handleSignOut} />
       </Logout>
     </Container>
   )
