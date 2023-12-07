@@ -9,6 +9,8 @@ export const Container = styled.div`
   align-items: center;
   gap: 0.4rem;
 
+  background: ${({ theme }) => theme.COLORS.Dark200};
+
   color: ${({ theme }) => theme.COLORS.Light400};
 
   > input {
@@ -20,8 +22,7 @@ export const Container = styled.div`
     font-size: 1.6rem;
     color: ${({ theme }) => theme.COLORS.Light400};
 
-    border: none;
-    outline: none;
+    border: 0;
 
     &::placeholder {
       color: ${({ theme }) => theme.COLORS.Light500};
