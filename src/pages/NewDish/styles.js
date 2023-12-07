@@ -142,8 +142,6 @@ export const Form = styled.form`
     flex-wrap: wrap;
     gap: 1.6rem;
 
-    height: 5.1rem;
-
     padding: 0.8rem;
 
     background: ${({ theme }) => theme.COLORS.Dark300};
