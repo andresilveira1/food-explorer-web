@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  max-width: 58.1rem;
   height: 4.8rem;
   flex: 1;
 
