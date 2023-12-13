@@ -1,6 +1,7 @@
 import { CaretLeft, UploadSimple } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 import { api } from '../../services/api'
 
@@ -19,12 +20,15 @@ export function NewDish() {
   const [image, setImage] = useState('')
   const [name, setName] = useState('')
   const [category, setCategory] = useState('')
-  const [ingredients, setIngredients] = useState([])
-  const [newIngredient, setNewIngredient] = useState('')
   const [price, setPrice] = useState('')
   const [description, setDescription] = useState('')
 
+  const [ingredient, setIngredient] = useState([])
+  const [newIngredient, setNewIngredient] = useState('')
+
   const navigate = useNavigate()
+
+  const [parent] = useAutoAnimate()
 
   function handleCategory(e) {
     setCategory(e.target.value)
@@ -39,33 +43,50 @@ export function NewDish() {
     if (!newIngredient) {
       alert('Digite o nome do ingrediente.')
     } else {
-      setIngredients((prevState) => [...prevState, newIngredient])
+      setIngredient((prevState) => [...prevState, newIngredient])
       setNewIngredient('')
     }
   }
 
   function handleRemoveIngredient(deleted) {
-    setIngredients((prevState) =>
+    setIngredient((prevState) =>
       prevState.filter((ingredient) => ingredient !== deleted),
     )
   }
 
   async function handleDish() {
-    if (
-      !image ||
-      !name ||
-      !category ||
-      !ingredients ||
-      !price ||
-      !description
-    ) {
-      return alert('Preencha todos os campos!')
-    }
-
     let id
 
+    if (!image) {
+      return alert('Insira a imagem do produto.')
+    }
+
+    if (!category) {
+      return alert('Selecione a categoria do produto.')
+    }
+
+    if (newIngredient) {
+      return alert(
+        'Existe um ingrediente que ainda não foi adicionado. Confirme a adição do ingrediente ou deixe o campo vazio.',
+      )
+    }
+
+    if (ingredient.length === 0) {
+      return alert('Adicione algum ingrediente ao produto.')
+    }
+
+    if (!name || !description || !price) {
+      return alert('Preencha todos os campos do produto.')
+    }
+
     await api
-      .post('/menus', { name, description, category, price, tags: ingredients })
+      .post('/menus', {
+        name,
+        description,
+        category,
+        price,
+        ingredient,
+      })
       .then((response) => {
         alert('Produto cadastrado com sucesso')
         navigate('/')
@@ -79,12 +100,10 @@ export function NewDish() {
         }
       })
 
-    if (image) {
-      const fileUploadForm = new FormData()
-      fileUploadForm.append('image', image)
+    const fileUploadForm = new FormData()
+    fileUploadForm.append('image', image)
 
-      await api.patch(`/menus/img/${id}`, fileUploadForm)
-    }
+    await api.patch(`/menus/img/${id}`, fileUploadForm)
   }
 
   return (
@@ -133,7 +152,6 @@ export function NewDish() {
               placeholder="Selecione uma categoria"
               id="category"
               onChange={handleCategory}
-              value={category}
             >
               <SelectItem text="Refeição" value="meal" />
               <SelectItem text="Sobremesas" value="desserts" />
@@ -144,8 +162,8 @@ export function NewDish() {
           <div>
             <label htmlFor="ingredients">Ingredientes</label>
 
-            <div className="dishitem">
-              {ingredients.map((ingredient, index) => (
+            <div className="dishitem" ref={parent}>
+              {ingredient.map((ingredient, index) => (
                 <DishItem
                   key={String(index)}
                   value={ingredient}
@@ -154,7 +172,7 @@ export function NewDish() {
               ))}
 
               <DishItem
-                isNew
+                $isNew
                 id="ingredients"
                 placeholder="Adicionar"
                 value={newIngredient}
@@ -168,7 +186,8 @@ export function NewDish() {
             <label htmlFor="price">Preço</label>
             <Input
               id="price"
-              placeholder="R$ 00,00"
+              type="text"
+              placeholder="Ex.: 00,00"
               onChange={(e) => setPrice(e.target.value)}
             />
           </div>

@@ -20,6 +20,12 @@ export const Container = styled.div`
     margin: 0 auto;
     padding-top: 1.1rem;
 
+    animation: fromLeft 0.5s 100ms backwards;
+
+    .close {
+      animation: toLeft 0.5s 100ms backwards;
+    }
+
     div {
       font-family: 'Poppins', sans-serif;
 
@@ -30,6 +36,8 @@ export const Container = styled.div`
       a {
         display: flex;
         align-items: center;
+
+        width: fit-content;
 
         font-size: 1.6rem;
         font-weight: 500;
