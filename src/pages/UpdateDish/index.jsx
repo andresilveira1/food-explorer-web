@@ -1,4 +1,9 @@
+import { useEffect, useState } from 'react'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import { CaretLeft, UploadSimple } from '@phosphor-icons/react'
+import { useAutoAnimate } from '@formkit/auto-animate/react'
+
+import { api } from '../../services/api'
 
 import { Container, Form } from './styles'
 
@@ -7,21 +12,136 @@ import { DishItem } from '../../components/DishItem'
 import { Header } from '../../components/Header'
 import { Input } from '../../components/Input'
 import { Select } from '../../components/Select'
+import { SelectItem } from '../../components/Select/SelectItem'
 import { Textarea } from '../../components/Textarea'
 import { Footer } from '../../components/Footer'
-import { SelectItem } from '../../components/Select/SelectItem'
 
 export function UpdateDish() {
+  const [image, setImage] = useState('')
+  const [name, setName] = useState('')
+  const [category, setCategory] = useState('')
+  const [ingredients, setIngredients] = useState([])
+  const [newIngredient, setNewIngredient] = useState('')
+  const [price, setPrice] = useState('')
+  const [description, setDescription] = useState('')
+
+  const params = useParams()
+  const navigate = useNavigate()
+  const [parent] = useAutoAnimate()
+
+  function handleBack() {
+    navigate(-1)
+  }
+
+  function handleSelect(value) {
+    setCategory(value)
+  }
+
+  function handleAddTag() {
+    if (!newIngredient) {
+      alert('Digite o nome do ingrediente.')
+    } else {
+      setIngredients((prevState) => [...prevState, newIngredient])
+      setNewIngredient('')
+    }
+  }
+
+  function handleRemoveTag(deleted) {
+    setIngredients((prevState) =>
+      prevState.filter((ingredient) => ingredient !== deleted),
+    )
+  }
+
+  function handleImage(event) {
+    const file = event.target.files[0]
+    setImage(file)
+  }
+
+  async function handleRemoveDish() {
+    const confirm = window.confirm(
+      'Tem certeza que deseja remover esse produto?',
+    )
+
+    if (confirm) {
+      await api.delete(`/menus/${params.id}`)
+      handleBack()
+    }
+  }
+
+  async function update() {
+    if (!name) {
+      return alert('Digite o nome do produto.')
+    }
+
+    await api
+      .put(`/menus/${params.id}`, {
+        name,
+        description,
+        tags: ingredients,
+        price,
+        category,
+      })
+      .then(() => {
+        if (image) {
+          const fileUploadForm = new FormData()
+          fileUploadForm.append('image', image)
+
+          api.patch(`/menus/img/${params.id}`, fileUploadForm)
+        }
+
+        alert('Produto atualizado com sucesso')
+        navigate('/')
+      })
+      .catch((error) => {
+        if (error.response) {
+          alert(error.response.data.message)
+        } else {
+          alert('Não foi possível atualizar o produto.')
+        }
+      })
+  }
+
+  useEffect(() => {
+    async function handleDishInfo() {
+      try {
+        const response = await api.get(`/menus/${params.id}`)
+
+        setName(response.data.name)
+        setCategory(response.data.category)
+        setPrice(response.data.price)
+        setDescription(response.data.description)
+      } catch (error) {
+        if (error.response) {
+          alert(error.response.data.message)
+        } else {
+          alert('Algo deu errado, não foi possível encontrar o produto.')
+        }
+      }
+    }
+
+    handleDishInfo()
+  }, [])
+
+  useEffect(() => {
+    async function handleTag() {
+      const response = await api.get(`/tags/${params.id}`)
+
+      setIngredients(response.data.map((item) => item.name))
+    }
+
+    handleTag()
+  }, [])
+
   return (
     <Container>
       <Header />
 
       <div>
         <div>
-          <a href="#">
+          <Link to="/">
             <CaretLeft />
             voltar
-          </a>
+          </Link>
 
           <h2>Editar prato</h2>
         </div>
@@ -33,44 +153,75 @@ export function UpdateDish() {
             <label htmlFor="img" className="fileLabel">
               <UploadSimple />
               <span>Selecione a imagem</span>
-              <input type="file" id="img" className="sr-only" />
+              <input
+                type="file"
+                id="img"
+                className="sr-only"
+                onChange={handleImage}
+              />
             </label>
           </div>
 
           <div>
             <label htmlFor="name">Nome</label>
-            <Input id="name" placeholder="Ex.: Salada Ceasar" />
+            <Input
+              type="text"
+              id="name"
+              value={name}
+              placeholder="Ex.: Salada Ceasar"
+              onChange={(e) => setName(e.target.value)}
+            />
           </div>
 
           <div>
             <label htmlFor="category">Categoria</label>
-            <Select placeholder="Selecione uma categoria" id="category">
+            <Select id="category" value={category} onValueChange={handleSelect}>
               <SelectItem text="Refeição" value="meal" />
               <SelectItem text="Sobremesas" value="desserts" />
-              <SelectItem text="Bebidas" value="driks" />
+              <SelectItem text="Bebidas" value="drinks" />
             </Select>
           </div>
 
           <div>
             <label htmlFor="ingredients">Ingredientes</label>
 
-            <div className="dish-item">
-              <DishItem value="Pão Naan" />
+            <div className="dish-item" ref={parent}>
+              {ingredients.map((ingredient, index) => (
+                <DishItem
+                  key={String(index)}
+                  value={ingredient}
+                  onClick={() => handleRemoveTag(ingredient)}
+                />
+              ))}
 
-              <DishItem isNew placeholder="Adicionar" />
+              <DishItem
+                $isNew
+                id="ingredients"
+                placeholder="Adicionar"
+                value={newIngredient}
+                onChange={(e) => setNewIngredient(e.target.value)}
+                onClick={handleAddTag}
+              />
             </div>
           </div>
 
           <div>
             <label htmlFor="price">Preço</label>
-            <Input id="price" placeholder="R$ 00,00" />
+            <Input
+              type="text"
+              id="price"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
           </div>
 
           <div>
             <label htmlFor="description">Descrição</label>
             <Textarea
+              type="text"
               id="description"
-              placeholder="Fale brevemente sobre o pratro, seus ingredientes e composição"
+              defaultValue={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </div>
 
@@ -79,11 +230,12 @@ export function UpdateDish() {
               className="button-remove"
               type="button"
               title="Excluir prato"
+              onClick={handleRemoveDish}
             />
             <Button
               className="button-save"
-              type="submit"
               title="Salvar alterações"
+              onClick={update}
             />
           </div>
         </Form>

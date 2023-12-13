@@ -20,6 +20,8 @@ export const Container = styled.div`
     margin: 0 auto;
     padding-top: 1.1rem;
 
+    animation: fromLeft 0.5s 100ms backwards;
+
     div {
       font-family: 'Poppins', sans-serif;
 
@@ -30,6 +32,8 @@ export const Container = styled.div`
       a {
         display: flex;
         align-items: center;
+
+        width: fit-content;
 
         font-size: 1.6rem;
         font-weight: 500;
@@ -143,8 +147,6 @@ export const Form = styled.form`
     align-items: center;
     flex-wrap: wrap;
     gap: 1.6rem;
-
-    height: 5.1rem;
 
     padding: 0.8rem;
 
