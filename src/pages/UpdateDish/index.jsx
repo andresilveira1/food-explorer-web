@@ -20,7 +20,7 @@ export function UpdateDish() {
   const [image, setImage] = useState('')
   const [name, setName] = useState('')
   const [category, setCategory] = useState('')
-  const [ingredients, setIngredients] = useState([])
+  const [ingredient, setIngredient] = useState([])
   const [newIngredient, setNewIngredient] = useState('')
   const [price, setPrice] = useState('')
   const [description, setDescription] = useState('')
@@ -41,13 +41,13 @@ export function UpdateDish() {
     if (!newIngredient) {
       alert('Digite o nome do ingrediente.')
     } else {
-      setIngredients((prevState) => [...prevState, newIngredient])
+      setIngredient((prevState) => [...prevState, newIngredient])
       setNewIngredient('')
     }
   }
 
   function handleRemoveTag(deleted) {
-    setIngredients((prevState) =>
+    setIngredient((prevState) =>
       prevState.filter((ingredient) => ingredient !== deleted),
     )
   }
@@ -69,15 +69,25 @@ export function UpdateDish() {
   }
 
   async function update() {
-    if (!name) {
-      return alert('Digite o nome do produto.')
+    if (!name || !description || !price) {
+      return alert('Preencha todos os campos do produto.')
+    }
+
+    if (newIngredient) {
+      return alert(
+        'Existe um ingrediente que ainda não foi adicionado. Confirme a adição do ingrediente ou deixe o campo vazio.',
+      )
+    }
+
+    if (ingredient.length === 0) {
+      return alert('Adicione algum ingrediente ao produto.')
     }
 
     await api
       .put(`/menus/${params.id}`, {
         name,
         description,
-        tags: ingredients,
+        ingredient,
         price,
         category,
       })
@@ -126,7 +136,7 @@ export function UpdateDish() {
     async function handleTag() {
       const response = await api.get(`/tags/${params.id}`)
 
-      setIngredients(response.data.map((item) => item.name))
+      setIngredient(response.data.map((item) => item.name))
     }
 
     handleTag()
@@ -186,7 +196,7 @@ export function UpdateDish() {
             <label htmlFor="ingredients">Ingredientes</label>
 
             <div className="dish-item" ref={parent}>
-              {ingredients.map((ingredient, index) => (
+              {ingredient.map((ingredient, index) => (
                 <DishItem
                   key={String(index)}
                   value={ingredient}
