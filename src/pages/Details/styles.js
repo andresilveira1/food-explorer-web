@@ -3,7 +3,7 @@ import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints'
 
 export const Container = styled.div`
   display: grid;
-  grid-template-rows: 10.4rem auto 7.7rem;
+  grid-template-rows: 11.4rem auto 7.7rem;
   grid-template-areas:
     'header'
     'content'
@@ -11,17 +11,23 @@ export const Container = styled.div`
 
   width: 100%;
   height: 100vh;
+
+  @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
+    grid-template-rows: 10.4rem auto 7.7rem;
+  }
 `
 
 export const Main = styled.main`
   grid-area: content;
   width: 31.6rem;
 
-  margin: 0 auto;
+  margin: 1.6rem auto;
 
-  > button {
+  > a {
     display: flex;
     align-items: center;
+
+    width: fit-content;
 
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
@@ -29,7 +35,7 @@ export const Main = styled.main`
     line-height: 140%;
     color: ${({ theme }) => theme.COLORS.Light100};
 
-    margin-top: 3.75rem;
+    margin-top: 2rem;
 
     svg {
       font-size: 3.2rem;
@@ -37,27 +43,25 @@ export const Main = styled.main`
   }
 
   @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
-    width: 100%;
+    width: 45rem;
 
     > button {
-      margin-left: 10rem;
-      margin-top: 5rem;
+      margin: 5rem 0 0 10rem;
     }
   }
 
   @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
-    max-width: 112rem;
-
-    padding: 0 5rem;
+    width: 93rem;
 
     > button {
-      margin-left: 0rem;
-      margin-top: 2.4rem;
+      margin: 2.4rem 0 0 0;
     }
   }
 
   @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
     padding: 0;
+
+    width: 112rem;
   }
 `
 
@@ -65,11 +69,24 @@ export const Product = styled.div`
   font-family: 'Poppins', sans-serif;
   color: ${({ theme }) => theme.COLORS.Light300};
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-bottom: 2rem;
+
   > img {
-    padding: 1.6rem 2.6rem;
+    width: 26.4rem;
+
+    margin: 1.6rem 0;
   }
 
   > div {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+
     h2 {
       font-size: 2.7rem;
       font-weight: 500;
@@ -92,34 +109,86 @@ export const Product = styled.div`
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+
       gap: 2.4rem;
 
       margin-bottom: 4.8rem;
     }
+
+    a {
+      font-size: 1.4rem;
+      font-weight: 500;
+      text-align: center;
+      color: ${({ theme }) => theme.COLORS.Light100};
+
+      padding: 1.2rem;
+
+      background: ${({ theme }) => theme.COLORS.Tomato400};
+      border-radius: 0.5rem;
+    }
+
+    .item-total {
+      display: flex;
+      gap: 1.6rem;
+
+      > div {
+        gap: 1.5rem;
+
+        font-family: 'Roboto', sans-serif;
+        font-size: 2.2rem;
+        font-weight: 500;
+      }
+
+      > button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 1.043rem 4.398rem;
+
+        font-size: 1rem;
+
+        svg {
+          font-size: 2.163rem;
+          margin-right: 0.54rem;
+        }
+      }
+    }
   }
 
   @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
-    > img {
-      display: block;
-
-      margin: 0 auto;
-      padding-top: 6rem;
-      padding-bottom: 5rem;
-    }
-
     > div {
       ul {
         margin: 0 2.55rem 4.8rem;
+      }
+
+      .item-total {
+        justify-content: space-evenly;
+        gap: 3rem;
+
+        > button {
+          max-width: 16.2rem;
+          padding: 1.2rem 2.4rem;
+
+          svg {
+            display: none;
+          }
+        }
       }
     }
   }
 
   @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
     display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
     align-items: center;
+    gap: 4.7rem;
+
+    margin: 4.2rem auto 0;
 
     > img {
-      padding: 4.2rem 4.7rem 0;
+      width: 39.011rem;
     }
 
     > div {
@@ -145,11 +214,18 @@ export const Product = styled.div`
       ul {
         margin: 0;
         gap: 1.2rem;
+
+        justify-content: flex-start;
+      }
+
+      .item-total {
+        margin-top: 4.8rem;
+
+        > button {
+          font-size: 1.4rem;
+          font-weight: 500;
+        }
       }
     }
-  }
-
-  @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
-    margin: 0 auto;
   }
 `
