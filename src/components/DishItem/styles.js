@@ -4,14 +4,12 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
 
-  width: max-content;
-
   padding: 0.8rem;
 
-  background: ${({ theme, isNew }) =>
-    isNew ? 'transparent' : theme.COLORS.Light600};
-  border: ${({ theme, isNew }) =>
-    isNew ? `1px dashed ${theme.COLORS.Light500}` : 'none'};
+  background-color: ${({ theme, $isNew }) =>
+    $isNew ? 'transparent' : theme.COLORS.Light600};
+  border: ${({ theme, $isNew }) =>
+    $isNew ? `1px dashed ${theme.COLORS.Light500}` : 'none'};
 
   > button {
     border: none;
@@ -33,9 +31,9 @@ export const Container = styled.div`
     border-radius: 0;
     background: transparent;
 
-    width: 10rem;
-
     padding: 0;
+
+    width: 8rem;
 
     color: ${({ theme }) => theme.COLORS.Light100};
 
