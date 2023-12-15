@@ -3,7 +3,7 @@ import { DEVICE_BREAKPOINTS } from '../../styles/deviceBreakpoints'
 
 export const Container = styled.div`
   display: grid;
-  grid-template-rows: 11rem auto 7.7rem;
+  grid-template-rows: 11.4rem auto 7.7rem;
   grid-template-areas:
     'header'
     'content'
@@ -56,6 +56,10 @@ export const Container = styled.div`
         margin-left: 3px;
       }
     }
+  }
+
+  @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
+    grid-template-rows: 10.4rem auto 7.7rem;
   }
 
   @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
