@@ -33,7 +33,6 @@ export function SignIn() {
           type="email"
           placeholder="exemplo@exemplo.com.br"
           onChange={(e) => setEmail(e.target.value)}
-          autoComplete="on"
         />
 
         <label htmlFor="password">Senha</label>
