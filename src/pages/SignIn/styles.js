@@ -9,6 +9,8 @@ export const Container = styled.div`
 
   height: 100vh;
 
+  animation: fromTop 1000ms linear backwards;
+
   > h1 {
     display: flex;
     align-items: center;
@@ -19,23 +21,9 @@ export const Container = styled.div`
 
     margin-bottom: 7.3rem;
 
-    animation: grow-and-shrink 2000ms;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-
     svg {
       color: ${({ theme }) => theme.COLORS.Cake200};
       font-size: 4.3rem;
-    }
-  }
-
-  @keyframes grow-and-shrink {
-    0% {
-      transform: scale(1);
-    }
-    100% {
-      transform: scale(1.5);
     }
   }
 
@@ -43,12 +31,16 @@ export const Container = styled.div`
     flex-direction: row;
     justify-content: space-around;
 
+    animation: none;
+
     > h1 {
       margin: 0;
 
       gap: 1.9rem;
 
       font-size: 4.2rem;
+
+      animation: fromLeft 1000ms 500ms backwards;
     }
   }
 `
@@ -124,17 +116,6 @@ export const Form = styled.form`
 
       opacity: 0.7;
       transition: 0.5s;
-    }
-  }
-
-  @keyframes fromTop {
-    from {
-      transform: translateY(-100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0%);
-      opacity: 1;
     }
   }
 
