@@ -25,6 +25,8 @@ export const Main = styled.main`
 
   font-family: 'Poppins', sans-serif;
 
+  animation: fromLeft 0.5s 100ms backwards;
+
   > h1 {
     line-height: 140%;
     font-weight: 500;
