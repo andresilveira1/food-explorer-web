@@ -14,6 +14,20 @@ export function Menu() {
 
   const { user } = useAuth()
 
+  const settings = {
+    slidesPerView: 'auto',
+    navigation: true,
+    breakpoints: {
+      320: {
+        spaceBetween: 16,
+      },
+
+      990: {
+        spaceBetween: 27,
+      },
+    },
+  }
+
   useEffect(() => {
     async function fetchProduct() {
       const response = await api.get('/menus')
@@ -35,12 +49,12 @@ export function Menu() {
     <>
       <Section title="Refeições">
         {meal && (
-          <Swiper navigation slidesPerView={'auto'}>
+          <Swiper {...settings}>
             {meal.map((item) => (
               <SwiperSlide
                 key={String(item.id)}
                 id={item.id}
-                style={{ width: 'auto', marginRight: '0px' }}
+                style={{ width: 'auto' }}
               >
                 {user.admin ? (
                   <Card
@@ -68,7 +82,7 @@ export function Menu() {
 
       <Section title="Sobremesas">
         {desserts && (
-          <Swiper navigation slidesPerView={'auto'}>
+          <Swiper {...settings}>
             {desserts.map((item) => (
               <SwiperSlide
                 key={String(item.id)}
@@ -91,7 +105,7 @@ export function Menu() {
 
       <Section title="Bebidas">
         {drinks && (
-          <Swiper navigation slidesPerView={'auto'}>
+          <Swiper {...settings}>
             {drinks.map((item) => (
               <SwiperSlide
                 key={String(item.id)}
