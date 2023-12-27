@@ -42,6 +42,10 @@ export default createGlobalStyle`
 
   button:hover, a:hover {
     filter: brigntness(0.9);
+
+    opacity: 0.7;
+
+    transition: 0.5s;
   }
 
   /* Select component: Styles inside a Portal. */
