@@ -10,7 +10,41 @@ export default createGlobalStyle`
 
   :root {
     font-size: 62.5%;
+
+    --swiper-navigation-size: 2.7rem;
   }
+
+  body, input, button, textarea {
+    outline: none;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.6rem;
+
+    background-color: ${({ theme }) => theme.COLORS.Dark700};
+    color: ${({ theme }) => theme.COLORS.Light100};
+
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  button, a {
+    cursor: pointer;
+  }
+
+  button:hover, a:hover {
+    filter: brigntness(0.9);
+  }
+
+  /* Select component: Styles inside a Portal. */
 
   .selectContent {
     background: ${({ theme }) => theme.COLORS.Dark300};
@@ -55,30 +89,9 @@ export default createGlobalStyle`
     width: 2rem;
   }
 
-  ul {
-    list-style: none;
-  }
 
-  body {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.6rem;
 
-    background-color: ${({ theme }) => theme.COLORS.Dark700};
-    color: ${({ theme }) => theme.COLORS.Light100};
-  }
-
-  a {
-    text-decoration: none;
-  }
-
-  button, a {
-    cursor: pointer;
-    transition: 0.2;
-  }
-
-  button:hover, a:hover {
-    filter: brigntness(0.9);
-  }
+  /* Scrollbar */
 
   ::-webkit-scrollbar {
     width: 1rem;
@@ -98,6 +111,18 @@ export default createGlobalStyle`
   }
   }
 
+  /* Input type number */
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
   @keyframes slideDown {
     from {
       transform: translateX(-2px);
@@ -107,6 +132,38 @@ export default createGlobalStyle`
     to {
       transform: translateX(0);
       opacity: 1
+    }
+  }
+
+  @keyframes fromLeft {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateX(0%);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fromTop {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0%);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
     }
   }
 `
