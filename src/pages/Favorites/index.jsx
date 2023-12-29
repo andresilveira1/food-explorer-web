@@ -19,26 +19,25 @@ export function Favorites() {
 
   const url = `${api.defaults.baseURL}/files/`
 
-  async function handleRemoveFav(id) {
+  async function handleRemoveFavorite(id) {
     const confirm = window.confirm(
       'Tem certeza que deseja remover esse produto da sua lista de favoritos?',
     )
 
     if (confirm) {
       await api.delete(`/favorites/${id}`)
-      window.location.reload()
     }
   }
 
   useEffect(() => {
-    async function handleFav() {
+    async function fetchFavorites() {
       const response = await api.get(`/favorites/${user.id}`)
 
       setData(response.data)
     }
 
-    handleFav()
-  }, [])
+    fetchFavorites()
+  }, [data])
 
   return (
     <Container>
@@ -62,7 +61,7 @@ export function Favorites() {
                   <Link to={`/details/${fav.menu_id}`}>{fav.name}</Link>
                   <ButtonText
                     title="Remover dos favoritos"
-                    onClick={() => handleRemoveFav(fav.id)}
+                    onClick={() => handleRemoveFavorite(fav.id)}
                   />
                 </div>
               </div>
