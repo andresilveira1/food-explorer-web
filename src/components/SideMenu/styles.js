@@ -75,12 +75,24 @@ export const Nav = styled.aside`
 
     margin-top: 4.6rem;
 
-    button {
-      margin: 0 0 1rem 1rem;
+    a {
+      display: block;
 
+      border-bottom: 1px solid ${({ theme }) => theme.COLORS.Dark100};
+
+      padding: 0 0 1rem 1rem;
+    }
+
+    button {
+      padding: 1rem 0 1rem 1rem;
+    }
+
+    a,
+    button {
       font-size: 2.4rem;
       font-family: 'Poppins', sans-serif;
       font-weight: 300;
+      line-height: 140%;
 
       color: ${({ theme }) => theme.COLORS.Light300};
     }

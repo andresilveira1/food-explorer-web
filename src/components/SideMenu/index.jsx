@@ -1,12 +1,21 @@
 import { X, MagnifyingGlass } from '@phosphor-icons/react'
+import { Link } from 'react-router-dom'
 
 import { Container, Header, Button, Nav } from './styles'
+
+import { useAuth } from '../../hooks/auth'
 
 import { Input } from '../Input'
 import { ButtonText } from '../ButtonText'
 import { Footer } from '../Footer'
 
 export function SideMenu({ menuIsOpen, onCloseMenu }) {
+  const { signOut, user } = useAuth()
+
+  function handleSignOut() {
+    signOut()
+  }
+
   return (
     <Container data-menu-is-open={menuIsOpen}>
       <Header>
@@ -24,7 +33,15 @@ export function SideMenu({ menuIsOpen, onCloseMenu }) {
         />
 
         <div>
-          <ButtonText title="Sair" />
+          {user.admin ? (
+            <Link to="newdish">Novo prato</Link>
+          ) : (
+            <Link to="/favorites" onClick={onCloseMenu}>
+              Meus favoritos
+            </Link>
+          )}
+
+          <ButtonText title="Sair" onClick={handleSignOut} />
         </div>
       </Nav>
 
