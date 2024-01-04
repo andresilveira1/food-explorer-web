@@ -127,7 +127,7 @@ export const Product = styled.div`
       border-radius: 0.5rem;
     }
 
-    .item-total {
+    .add-product {
       display: flex;
       gap: 1.6rem;
 
@@ -153,6 +153,32 @@ export const Product = styled.div`
           margin-right: 0.54rem;
         }
       }
+
+      .item-total {
+        display: flex;
+        align-items: center;
+        gap: 1.6rem;
+
+        > button {
+          background: none;
+          border: transparent;
+
+          svg {
+            color: ${({ theme }) => theme.COLORS.Light100};
+          }
+        }
+
+        > span {
+          color: ${({ theme }) => theme.COLORS.Light300};
+        }
+
+        @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
+          > span {
+            font-size: 2rem;
+            font-weight: 700;
+          }
+        }
+      }
     }
   }
 
@@ -162,7 +188,7 @@ export const Product = styled.div`
         margin: 0 2.55rem 4.8rem;
       }
 
-      .item-total {
+      .add-product {
         justify-content: space-evenly;
         gap: 3rem;
 
@@ -218,7 +244,11 @@ export const Product = styled.div`
         justify-content: flex-start;
       }
 
-      .item-total {
+      a {
+        margin-top: 4.8rem;
+      }
+
+      .add-product {
         margin-top: 4.8rem;
 
         > button {

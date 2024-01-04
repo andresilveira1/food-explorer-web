@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { CaretLeft, Receipt } from '@phosphor-icons/react'
+import { CaretLeft, Minus, Plus, Receipt } from '@phosphor-icons/react'
 
 import { api } from '../../services/api'
 import { useAuth } from '../../hooks/auth'
@@ -11,11 +11,11 @@ import { Header } from '../../components/Header'
 import { Ingredients } from '../../components/Ingredients'
 import { Footer } from '../../components/Footer'
 import { SideMenu } from '../../components/SideMenu'
-import { ItemTotal } from '../../components/Menu/ItemTotal'
 import { Button } from '../../components/Button'
 
 export function Details() {
   const [menuIsOpen, setMenuIsOpen] = useState(false)
+  const [productQuantity, setProductQuantity] = useState(1)
   const [data, setData] = useState([])
   const [tags, setTags] = useState([])
 
@@ -23,6 +23,23 @@ export function Details() {
   const params = useParams()
 
   const url = `${api.defaults.baseURL}/files/`
+
+  function addProductQuatity() {
+    setProductQuantity((prevState) => ++prevState)
+  }
+
+  function removeProductQuatity() {
+    if (productQuantity > 1) {
+      setProductQuantity((prevState) => --prevState)
+    }
+  }
+
+  async function handleRequest() {
+    await api.post('/payment', {
+      quantity: productQuantity,
+      menu_id: params.id,
+    })
+  }
 
   useEffect(() => {
     async function handleRequest() {
@@ -88,10 +105,24 @@ export function Details() {
             {user.admin ? (
               <Link to={`/updatedish/${params.id}`}>Editar prato</Link>
             ) : (
-              <div className="item-total">
-                <ItemTotal />
+              <div className="add-product">
+                <div className="item-total">
+                  <button onClick={removeProductQuatity}>
+                    <Minus size={24} />
+                  </button>
 
-                <Button title={`incluir ∙ ${data.price}`} icon={Receipt} />
+                  <span>{String(productQuantity).padStart(2, '0')}</span>
+
+                  <button onClick={addProductQuatity}>
+                    <Plus size={24} />
+                  </button>
+                </div>
+
+                <Button
+                  title={`incluir ∙ ${data.price}`}
+                  icon={Receipt}
+                  onClick={handleRequest}
+                />
               </div>
             )}
           </div>
