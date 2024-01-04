@@ -1,6 +1,11 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { CaretRight, HeartStraight, PencilSimple } from '@phosphor-icons/react'
+import {
+  CaretRight,
+  HeartStraight,
+  Minus,
+  PencilSimple,
+  Plus,
+} from '@phosphor-icons/react'
 
 import { api } from '../../../services/api'
 import { useAuth } from '../../../hooks/auth'
@@ -9,21 +14,61 @@ import { Container } from './styles'
 
 import { Button } from '../../Button'
 import { ButtonText } from '../../ButtonText'
-import { ItemTotal } from '../ItemTotal'
+import { useEffect, useState } from 'react'
 
-export function Card({ favName, image, id, name, description, price }) {
-  const [fav, setFav] = useState('')
-
+export function Card({ image, id, name, description, price }) {
   const { user } = useAuth()
+  const user_id = user.id
+
+  const [productQuantity, setProductQuantity] = useState(1)
+  const [favoriteId, setFavoriteId] = useState(null)
+  const [favorited, setFavorited] = useState(false)
 
   const url = `${api.defaults.baseURL}/files/`
 
-  async function favItem() {
-    const favItem = fav.name
-    const user_id = user.id
-
-    await api.post('/favorites', { name: favItem, user_id })
+  function addProductQuatity() {
+    setProductQuantity((prevState) => ++prevState)
   }
+
+  function removeProductQuatity() {
+    if (productQuantity > 1) {
+      setProductQuantity((prevState) => --prevState)
+    }
+  }
+
+  async function handleFavorite() {
+    const { data } = await api.get(`/favorites/${user.id}`)
+    const favExists = data.filter((item) => item.menu_id === id)
+    const menu_id = favExists.map((item) => item.menu_id)
+
+    if (Number(menu_id) === id) {
+      await api.delete(`/favorites/${favoriteId}`)
+      setFavorited(false)
+    } else {
+      const favorite_id = await api.post('/favorites', { user_id, menu_id: id })
+      setFavoriteId(favorite_id)
+      setFavorited(true)
+    }
+  }
+
+  async function handleRequest() {
+    await api.post('/payment', {
+      quantity: productQuantity,
+      menu_id: id,
+    })
+  }
+
+  useEffect(() => {
+    async function fetchFavorites() {
+      const response = await api.get(`/favorites/${user.id}`)
+      const favorite = response.data.find((fav) => fav.menu_id === id)
+
+      setFavoriteId(favorite ? favorite.id : null)
+      setFavorited(!!favoriteId)
+    }
+
+    fetchFavorites()
+  }, [favoriteId])
 
   return (
     <Container>
@@ -33,13 +78,15 @@ export function Card({ favName, image, id, name, description, price }) {
         </Link>
       ) : (
         <ButtonText
-          className="fav"
-          icon={HeartStraight}
-          onClick={() => {
-            setFav(favName)
-            favItem()
-          }}
-        />
+          className={favorited ? 'fav-actived' : 'fav-disabled'}
+          onClick={handleFavorite}
+        >
+          {favorited ? (
+            <HeartStraight weight="fill" />
+          ) : (
+            <HeartStraight weight="regular" />
+          )}
+        </ButtonText>
       )}
 
       <img src={`${url}${image}`} alt="" className="slide-img" />
@@ -50,20 +97,25 @@ export function Card({ favName, image, id, name, description, price }) {
 
       <h2>{description}</h2>
 
-      <p>
-        {price.toLocaleString('pt-BR', {
-          style: 'currency',
-          currency: 'BRL',
-        })}
-      </p>
+      <p>{`R$ ${price}`}</p>
 
       {user.admin ? (
         ''
       ) : (
         <div className="add-product">
-          <ItemTotal />
+          <div className="item-total">
+            <button onClick={removeProductQuatity}>
+              <Minus size={24} />
+            </button>
 
-          <Button title="incluir" />
+            <span>{String(productQuantity).padStart(2, '0')}</span>
+
+            <button onClick={addProductQuatity}>
+              <Plus size={24} />
+            </button>
+          </div>
+
+          <Button title="incluir" onClick={handleRequest} />
         </div>
       )}
     </Container>

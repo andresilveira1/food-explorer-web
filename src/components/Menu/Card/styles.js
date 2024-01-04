@@ -10,17 +10,31 @@ export const Container = styled.div`
   position: relative;
 
   padding: 2.4rem;
+  margin: 0;
 
   height: 29.2rem;
   width: 21rem;
 
-  margin: 0;
+  flex-shrink: 0;
 
   border-radius: 0.8rem;
+  border: 1px solid ${({ theme }) => theme.COLORS.Dark800};
 
   background: ${({ theme }) => theme.COLORS.Dark900};
 
-  .fav {
+  .fav-disabled {
+    position: absolute;
+    top: 1.6rem;
+    right: 1.6rem;
+
+    font-size: 3rem;
+
+    svg {
+      color: ${({ theme }) => theme.COLORS.Light300};
+    }
+  }
+
+  .fav-actived {
     position: absolute;
     top: 1.6rem;
     right: 1.6rem;
@@ -74,6 +88,32 @@ export const Container = styled.div`
 
     width: 100%;
     height: 8rem;
+
+    .item-total {
+      display: flex;
+      align-items: center;
+      gap: 1.6rem;
+
+      > button {
+        background: none;
+        border: transparent;
+
+        svg {
+          color: ${({ theme }) => theme.COLORS.Light100};
+        }
+      }
+
+      > span {
+        color: ${({ theme }) => theme.COLORS.Light300};
+      }
+
+      @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
+        > span {
+          font-size: 2rem;
+          font-weight: 700;
+        }
+      }
+    }
   }
 
   @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
