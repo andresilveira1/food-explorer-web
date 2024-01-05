@@ -3,12 +3,23 @@ import { CaretDown } from '@phosphor-icons/react'
 
 import { Container } from './styles'
 
-export function Select({ children, placeholder, ...rest }) {
+export function Select({
+  children,
+  placeholder,
+  onValueChange,
+  value,
+  id,
+  ...rest
+}) {
   return (
-    <Container>
-      <SelectPrimitive.Root className="primitive" {...rest}>
-        <SelectPrimitive.Trigger className="trigger">
-          <SelectPrimitive.Value className="value" placeholder={placeholder} />
+    <Container {...rest}>
+      <SelectPrimitive.Root
+        className="primitive"
+        value={value}
+        onValueChange={onValueChange}
+      >
+        <SelectPrimitive.Trigger className="trigger" id={id}>
+          <SelectPrimitive.Value placeholder={placeholder} />
           <SelectPrimitive.Icon>
             <CaretDown className="icon" />
           </SelectPrimitive.Icon>
