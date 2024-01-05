@@ -17,10 +17,6 @@ export const Container = styled.section`
     color: ${({ theme }) => theme.COLORS.Light300};
   }
 
-  .swiper-wrapper {
-    gap: 1.6rem;
-  }
-
   .swiper-button-next,
   .swiper-button-prev {
     display: none;
@@ -75,10 +71,6 @@ export const Container = styled.section`
 
     > h2 {
       font-size: 3.2rem;
-    }
-
-    .swiper-wrapper {
-      gap: 2.7rem;
     }
   }
 `
