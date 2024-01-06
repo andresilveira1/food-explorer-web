@@ -6,7 +6,6 @@ export const Container = styled.header`
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
 
   padding: 5.6rem 2.8rem 2.4rem;
   background-color: ${({ theme }) => theme.COLORS.Dark500};
@@ -14,25 +13,48 @@ export const Container = styled.header`
   position: fixed;
 
   width: 100%;
+  height: 11.4rem;
 
-  > h1 {
+  @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+    gap: 3.2rem;
+
+    padding: 0 3.7rem;
+
+    height: 10.4rem;
+  }
+
+  @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
+    justify-content: center;
+  }
+`
+
+export const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 3.2rem;
+
+  width: 112rem;
+
+  .menu {
+    font-size: 3.2rem;
+    color: ${({ theme }) => theme.COLORS.Light100};
+  }
+
+  .logo {
     display: flex;
     align-items: center;
     gap: 0.8rem;
 
     font-size: 2.1rem;
+    font-weight: 700;
+    color: ${({ theme }) => theme.COLORS.Light100};
 
-    position: relative;
+    margin: 0 auto;
 
     span {
+      font-weight: 400;
       font-size: 1.2rem;
-      line-height: 160%;
       color: ${({ theme }) => theme.COLORS.Cake100};
-
-      position: absolute;
-
-      right: 0;
-      bottom: -1.5rem;
     }
 
     svg {
@@ -44,33 +66,79 @@ export const Container = styled.header`
     display: none;
   }
 
-  > .new-dish {
+  .my-fav {
     display: none;
   }
 
-  > .request-button {
+  .new-dish {
     display: none;
+  }
+
+  .order-button {
+    background: transparent;
+    color: transparent;
+
+    flex: 0;
+
+    width: 3.2rem;
+    height: 3.2rem;
+
+    border-radius: 0.5rem;
+
+    svg {
+      font-size: 3.2rem;
+      color: ${({ theme }) => theme.COLORS.Light100};
+    }
+  }
+
+  > span {
+    position: absolute;
+
+    right: 22px;
+    top: 55px;
+
+    font-size: 1.4rem;
+
+    padding: 0 0.55rem;
+
+    border-radius: 99px;
+    background: ${({ theme }) => theme.COLORS.Tomato400};
   }
 
   @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
-    padding: 0 5rem;
+    .menu {
+      display: none;
+    }
 
-    height: 10.4rem;
+    .logo {
+      position: relative;
 
-    > h1 {
-      margin-right: 2rem;
+      margin: 0;
+
+      span {
+        position: absolute;
+
+        right: 0;
+        bottom: -1.5rem;
+      }
     }
 
     > div {
       display: flex;
 
       border-radius: 0.5rem;
+      max-width: 58.1rem;
 
-      padding: 0 5rem;
-      margin-right: 2rem;
+      padding: 0 3rem;
     }
 
-    > .new-dish {
+    .my-fav {
+      display: block;
+
+      color: ${({ theme }) => theme.COLORS.Light300};
+    }
+
+    .new-dish {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -82,56 +150,67 @@ export const Container = styled.header`
       background: ${({ theme }) => theme.COLORS.Tomato400};
       color: ${({ theme }) => theme.COLORS.Light100};
 
-      margin-right: 2rem;
-
       border-radius: 0.5rem;
 
       width: 21.6rem;
       height: 4.8rem;
     }
 
-    > .request-button {
+    .order-button {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 0.8rem;
 
       padding: 1.6rem 0;
-      margin-right: 2rem;
 
       font-size: 1.4rem;
 
-      max-width: 21.6rem;
+      max-width: 15rem;
+      height: 5.6rem;
+
+      background: ${({ theme }) => theme.COLORS.Tomato400};
+      color: ${({ theme }) => theme.COLORS.Light100};
+
+      flex: 1;
+
+      svg {
+        font-size: 3.2rem;
+        color: ${({ theme }) => theme.COLORS.Light100};
+      }
 
       svg {
         font-size: 2.6rem;
       }
     }
+
+    > span {
+      display: none;
+    }
   }
 
   @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
-    justify-content: center;
-
-    > h1 {
+    .logo {
       gap: 1rem;
 
       font-size: 2.4rem;
 
-      margin-right: 4.3rem;
+      padding-right: 1.1rem;
+
+      span {
+        position: absolute;
+
+        right: 1.2rem;
+        bottom: -1.5rem;
+      }
     }
 
     > div {
-      padding: 0 9.5rem;
-
-      margin-right: 3.2rem;
+      padding: 0 7.45rem;
     }
 
-    > .new-dish {
-      margin-right: 3.2rem;
-    }
-
-    > .request-button {
-      margin-right: 3.2rem;
+    .order-button {
+      max-width: 21.6rem;
     }
   }
 `
@@ -146,22 +225,5 @@ export const Logout = styled.button`
 
   @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
     display: block;
-  }
-`
-
-export const Menu = styled.button`
-  background: none;
-  border: none;
-
-  > svg {
-    color: ${({ theme }) => theme.COLORS.Light100};
-  }
-
-  @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
-    display: block;
-  }
-
-  @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
-    display: none;
   }
 `
