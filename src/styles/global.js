@@ -93,7 +93,16 @@ export default createGlobalStyle`
     width: 2rem;
   }
 
+  /* Input Search Autocomplete */
 
+  .autocomplete {
+    position: absolute;
+    top: 7.7rem;
+
+    z-index: 10;
+
+    background: red;
+  }
 
   /* Scrollbar */
 
