@@ -10,7 +10,7 @@ export const Container = styled.header`
   padding: 5.6rem 2.8rem 2.4rem;
   background-color: ${({ theme }) => theme.COLORS.Dark500};
 
-  position: fixed;
+  position: absolute;
 
   width: 100%;
   height: 11.4rem;
@@ -62,7 +62,7 @@ export const Wrapper = styled.div`
     }
   }
 
-  > div {
+  .input-search {
     display: none;
   }
 
@@ -123,13 +123,17 @@ export const Wrapper = styled.div`
       }
     }
 
-    > div {
+    .input-search {
       display: flex;
 
-      border-radius: 0.5rem;
-      max-width: 58.1rem;
+      flex: 1;
 
-      padding: 0 3rem;
+      div {
+        border-radius: 0.5rem;
+        max-width: 58.1rem;
+
+        padding: 0 3rem;
+      }
     }
 
     .my-fav {
@@ -205,8 +209,10 @@ export const Wrapper = styled.div`
       }
     }
 
-    > div {
-      padding: 0 7.45rem;
+    .input-search {
+      div {
+        padding: 0 7.45rem;
+      }
     }
 
     .order-button {
