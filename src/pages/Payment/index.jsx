@@ -11,10 +11,10 @@ import { Header } from '../../components/Header'
 import { ButtonText } from '../../components/ButtonText'
 import { Button } from '../../components/Button'
 import { Footer } from '../../components/Footer'
+import { SideMenu } from '../../components/SideMenu'
+import { Input } from '../../components/Input'
 
 import QRCode from '../../assets/QRCode.svg'
-import { Input } from '../../components/Input'
-import { SideMenu } from '../../components/SideMenu'
 
 export function Payment() {
   const { user } = useAuth()
@@ -34,6 +34,8 @@ export function Payment() {
     if (confirm) {
       await api.delete(`/payment/${id}`)
     }
+
+    window.location.reload()
   }
 
   useEffect(() => {
@@ -50,7 +52,8 @@ export function Payment() {
     }
 
     handleOrder()
-  }, [order])
+  }, [])
+
   return (
     <Container>
       <Header onOpenMenu={() => setMenuIsOpen(true)} />
