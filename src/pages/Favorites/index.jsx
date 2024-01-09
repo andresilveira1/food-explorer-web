@@ -27,6 +27,8 @@ export function Favorites() {
     if (confirm) {
       await api.delete(`/favorites/${id}`)
     }
+
+    window.location.reload()
   }
 
   useEffect(() => {
@@ -37,7 +39,7 @@ export function Favorites() {
     }
 
     fetchFavorites()
-  }, [data])
+  }, [])
 
   return (
     <Container>
