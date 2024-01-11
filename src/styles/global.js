@@ -93,17 +93,6 @@ export default createGlobalStyle`
     width: 2rem;
   }
 
-  /* Input Search Autocomplete */
-
-  .autocomplete {
-    position: absolute;
-    top: 7.7rem;
-
-    z-index: 10;
-
-    background: red;
-  }
-
   /* Scrollbar */
 
   ::-webkit-scrollbar {
@@ -134,6 +123,7 @@ export default createGlobalStyle`
 
   input[type=number] {
     -moz-appearance: textfield;
+    appearance: none;
   }
 
   @keyframes slideDown {
