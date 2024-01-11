@@ -126,6 +126,8 @@ export const Wrapper = styled.div`
     .input-search {
       display: flex;
 
+      position: relative;
+
       flex: 1;
 
       div {
@@ -133,6 +135,42 @@ export const Wrapper = styled.div`
         max-width: 58.1rem;
 
         padding: 0 3rem;
+      }
+
+      .autocomplete {
+        position: absolute;
+        top: 5rem;
+        z-index: 10;
+
+        right: 0;
+        left: 0;
+      }
+
+      .autocomplete-options {
+        background: ${({ theme }) => theme.COLORS.Dark200};
+        border: 1px solid ${({ theme }) => theme.COLORS.Dark500};
+
+        a {
+          color: ${({ theme }) => theme.COLORS.Light400};
+
+          display: block;
+
+          padding: 1.3rem;
+        }
+      }
+
+      .autocomplete-options:first-child {
+        border-top-right-radius: 0.5rem;
+        border-top-left-radius: 0.5rem;
+      }
+
+      .autocomplete-options:last-child {
+        border-bottom-right-radius: 0.5rem;
+        border-bottom-left-radius: 0.5rem;
+      }
+
+      .li-focus {
+        background: ${({ theme }) => theme.COLORS.Dark100};
       }
     }
 

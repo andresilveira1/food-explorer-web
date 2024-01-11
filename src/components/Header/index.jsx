@@ -19,11 +19,26 @@ export function Header({ onOpenMenu }) {
   const { signOut, user } = useAuth()
 
   const [search, setSearch] = useState('')
-  const [dishId, setDishId] = useState([])
-  const [dishName, setDishName] = useState([])
-  const [request, setRequest] = useState([])
+  const [dish, setDish] = useState([])
+  const [ingredients, setIngredients] = useState([])
+  const [focusedIndex, setFocusedIndex] = useState(-1)
+  const [request, setRequest] = useState(0)
 
   const navigate = useNavigate()
+
+  function handleSearch() {
+    window.location.reload()
+  }
+
+  function handleIndex(e) {
+    if (e.key === 'ArrowUp') {
+      e.preventDefault()
+      setFocusedIndex((prevIndex) => Math.max(prevIndex - 1, 0))
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault()
+      setFocusedIndex((prevIndex) => Math.min(prevIndex + 1, dish.length - 1))
+    }
+  }
 
   function handleSignOut() {
     navigate('/')
@@ -32,35 +47,44 @@ export function Header({ onOpenMenu }) {
 
   useEffect(() => {
     async function handleRequest() {
-      const response = await api.get(`/payment/${user.id}`)
+      try {
+        const response = await api.get(`/payment/${user.id}`)
 
-      setRequest(response.data)
+        setRequest(response.data.length)
+      } catch (error) {
+        if (error.response) {
+          alert(error.response.data.message)
+        } else {
+          alert('Algo deu errado, não foi possível se conectar.')
+        }
+      }
     }
 
     handleRequest()
-  }, [request])
+  }, [])
+
+  // useEffect(() => {
+  //   async function fetchIngredients() {
+  //     const response = await api.get('/tags')
+  //   }
+  // }, [])
 
   useEffect(() => {
     async function fetchDish() {
       const response = await api.get(`/menus?name=${search}`)
-      const dish_id = response.data.map((menu) => menu.id)
-      const dish_name = response.data.map((menu) => menu.name)
+      const dish = response.data.map((menu) => menu)
 
-      setDishId(dish_id[0])
-      setDishName(dish_name.sort())
+      if (search) {
+        setDish(dish)
+      } else {
+        setDish([])
+      }
 
-      const inputSearch = document.getElementById('search')
-      inputSearch.addEventListener('keydown', (e) => {
-        if (search === '') {
-          return ''
-        } else if (e.key === 'Enter') {
-          window.location.href = `/details/${dishId}`
-        }
-      })
+      setFocusedIndex(-1)
     }
 
     fetchDish()
-  }, [search, dishId])
+  }, [search])
 
   return (
     <Container>
@@ -79,13 +103,25 @@ export function Header({ onOpenMenu }) {
             icon={MagnifyingGlass}
             placeholder="Busque por pratos ou ingredientes"
             onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={handleIndex}
           />
 
-          <ul className="autocomplete">
-            <li className="autocomplete-options">Teste</li>
-            <li className="autocomplete-options">Teste</li>
-            <li className="autocomplete-options">Teste</li>
-          </ul>
+          {dish && (
+            <ul className="autocomplete">
+              {dish.map((dish, index) => (
+                <li
+                  key={String(dish.id)}
+                  className={`autocomplete-options ${
+                    index === focusedIndex ? 'li-focus' : ''
+                  }`}
+                  tabIndex={index + 1}
+                  onClick={handleSearch}
+                >
+                  <Link to={`/details/${dish.id}`}>{dish.name}</Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         {!user.admin ? (
@@ -103,11 +139,11 @@ export function Header({ onOpenMenu }) {
         ) : (
           <Link to="/payment" className="order-button">
             <Receipt />
-            {`Pedidos (${request.length})`}
+            {`Pedidos (${request})`}
           </Link>
         )}
 
-        <span>{request.length}</span>
+        <span>{request}</span>
 
         <Logout>
           <SignOut size={32} onClick={handleSignOut} />
