@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.button`
   font-family: 'Poppins', sans-serif;
-  font-weight: medium;
+  font-weight: 500;
 
   width: 100%;
   border: 0;
@@ -17,11 +17,5 @@ export const Container = styled.button`
 
   &:disabled {
     opacity: 0.5;
-  }
-
-  &:hover {
-    background-color: ${({ theme }) => theme.COLORS.Tomato300};
-
-    transition: 0.5s;
   }
 `
