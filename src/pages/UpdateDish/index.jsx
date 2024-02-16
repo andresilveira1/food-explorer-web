@@ -100,7 +100,7 @@ export function UpdateDish() {
         }
 
         alert('Produto atualizado com sucesso')
-        navigate('/')
+        handleBack()
       })
       .catch((error) => {
         if (error.response) {
@@ -148,7 +148,7 @@ export function UpdateDish() {
 
       <div>
         <div>
-          <Link to="/">
+          <Link onClick={handleBack}>
             <CaretLeft />
             voltar
           </Link>

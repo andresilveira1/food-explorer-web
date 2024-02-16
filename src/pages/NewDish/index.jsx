@@ -30,6 +30,10 @@ export function NewDish() {
 
   const [parent] = useAutoAnimate()
 
+  function handleBack() {
+    navigate(-1)
+  }
+
   function handleCategory(e) {
     setCategory(e.target.value)
   }
@@ -89,7 +93,7 @@ export function NewDish() {
       })
       .then((response) => {
         alert('Produto cadastrado com sucesso')
-        navigate('/')
+        handleBack()
         id = response.data.menu_id
       })
       .catch((error) => {
@@ -112,7 +116,7 @@ export function NewDish() {
 
       <div>
         <div>
-          <Link to="/">
+          <Link onClick={handleBack}>
             <CaretLeft />
             voltar
           </Link>
