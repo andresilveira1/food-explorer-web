@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 
 import { useAuth } from '../hooks/auth'
 
@@ -18,6 +18,9 @@ export function AppRoutes() {
       <Route path="/details/:id" element={<Details />} />
       <Route path="/favorites" element={<Favorites />} />
       <Route path="/payment" element={<Payment />} />
+
+      <Route path="*" element={<Navigate to="/" />} />
+
       {user.admin && <Route path="/newdish" element={<NewDish />} />}
       {user.admin && <Route path="/updatedish/:id" element={<UpdateDish />} />}
     </Routes>
