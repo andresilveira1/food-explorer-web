@@ -17,14 +17,13 @@ import { api } from '../../services/api'
 
 export function Header({ onOpenMenu }) {
   const { signOut, user } = useAuth()
+  const navigate = useNavigate()
 
   const [search, setSearch] = useState('')
   const [dish, setDish] = useState([])
-  const [ingredients, setIngredients] = useState([])
+  // const [ingredients, setIngredients] = useState([])
   const [focusedIndex, setFocusedIndex] = useState(-1)
   const [request, setRequest] = useState(0)
-
-  const navigate = useNavigate()
 
   function handleSearch() {
     window.location.reload()
@@ -143,7 +142,7 @@ export function Header({ onOpenMenu }) {
           </Link>
         )}
 
-        <span>{request}</span>
+        {!user.admin && <span>{request}</span>}
 
         <Logout>
           <SignOut size={32} onClick={handleSignOut} />
