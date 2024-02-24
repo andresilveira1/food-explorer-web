@@ -61,11 +61,14 @@ export const Nav = styled.aside`
   background-color: ${({ theme }) => theme.COLORS.Dark700};
 
   > div:nth-child(1) {
+    display: block;
+
     width: 100%;
 
-    padding: 1.4rem 0.8rem;
-
-    border-radius: 0.5rem;
+    div {
+      padding: 1.4rem 0.8rem;
+      border-radius: 0.5rem;
+    }
   }
 
   > div:nth-child(2) {

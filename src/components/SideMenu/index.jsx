@@ -1,13 +1,13 @@
-import { X, MagnifyingGlass } from '@phosphor-icons/react'
+import { X } from '@phosphor-icons/react'
 import { Link } from 'react-router-dom'
 
 import { Container, Header, Button, Nav } from './styles'
 
 import { useAuth } from '../../hooks/auth'
 
-import { Input } from '../Input'
 import { ButtonText } from '../ButtonText'
 import { Footer } from '../Footer'
+import { Search } from '../Search'
 
 export function SideMenu({ menuIsOpen, onCloseMenu }) {
   const { signOut, user } = useAuth()
@@ -27,14 +27,11 @@ export function SideMenu({ menuIsOpen, onCloseMenu }) {
       </Header>
 
       <Nav>
-        <Input
-          icon={MagnifyingGlass}
-          placeholder="Busque por pratos ou ingredientes"
-        />
+        <Search />
 
         <div>
           {user.admin ? (
-            <Link to="newdish">Novo prato</Link>
+            <Link to="/newdish">Novo prato</Link>
           ) : (
             <Link to="/favorites" onClick={onCloseMenu}>
               Meus favoritos
