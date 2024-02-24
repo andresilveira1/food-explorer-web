@@ -1,43 +1,19 @@
-import {
-  List,
-  Hexagon,
-  MagnifyingGlass,
-  Receipt,
-  SignOut,
-} from '@phosphor-icons/react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { List, Hexagon, Receipt, SignOut } from '@phosphor-icons/react'
 
+import { api } from '../../services/api'
 import { useAuth } from '../../hooks/auth'
 
 import { Container, Wrapper, Logout } from './styles'
 
-import { Input } from '../Input'
-import { useEffect, useState } from 'react'
-import { api } from '../../services/api'
+import { Search } from '../Search'
 
 export function Header({ onOpenMenu }) {
   const { signOut, user } = useAuth()
   const navigate = useNavigate()
 
-  const [search, setSearch] = useState('')
-  const [dish, setDish] = useState([])
-  // const [ingredients, setIngredients] = useState([])
-  const [focusedIndex, setFocusedIndex] = useState(-1)
   const [request, setRequest] = useState(0)
-
-  function handleSearch() {
-    window.location.reload()
-  }
-
-  function handleIndex(e) {
-    if (e.key === 'ArrowUp') {
-      e.preventDefault()
-      setFocusedIndex((prevIndex) => Math.max(prevIndex - 1, 0))
-    } else if (e.key === 'ArrowDown') {
-      e.preventDefault()
-      setFocusedIndex((prevIndex) => Math.min(prevIndex + 1, dish.length - 1))
-    }
-  }
 
   function handleSignOut() {
     navigate('/')
@@ -62,29 +38,6 @@ export function Header({ onOpenMenu }) {
     handleRequest()
   }, [])
 
-  // useEffect(() => {
-  //   async function fetchIngredients() {
-  //     const response = await api.get('/tags')
-  //   }
-  // }, [])
-
-  useEffect(() => {
-    async function fetchDish() {
-      const response = await api.get(`/menus?name=${search}`)
-      const dish = response.data.map((menu) => menu)
-
-      if (search) {
-        setDish(dish)
-      } else {
-        setDish([])
-      }
-
-      setFocusedIndex(-1)
-    }
-
-    fetchDish()
-  }, [search])
-
   return (
     <Container>
       <Wrapper>
@@ -96,32 +49,7 @@ export function Header({ onOpenMenu }) {
           {user.admin ? <span>admin</span> : ''}
         </Link>
 
-        <div className="input-search">
-          <Input
-            id="search"
-            icon={MagnifyingGlass}
-            placeholder="Busque por pratos ou ingredientes"
-            onChange={(e) => setSearch(e.target.value)}
-            onKeyDown={handleIndex}
-          />
-
-          {dish && (
-            <ul className="autocomplete">
-              {dish.map((dish, index) => (
-                <li
-                  key={String(dish.id)}
-                  className={`autocomplete-options ${
-                    index === focusedIndex ? 'li-focus' : ''
-                  }`}
-                  tabIndex={index + 1}
-                  onClick={handleSearch}
-                >
-                  <Link to={`/details/${dish.id}`}>{dish.name}</Link>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+        <Search />
 
         {!user.admin ? (
           <Link to="/favorites" className="my-fav">
