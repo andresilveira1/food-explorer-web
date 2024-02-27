@@ -33,9 +33,8 @@ export function Payment() {
 
     if (confirm) {
       await api.delete(`/payment/${id}`)
+      window.location.reload()
     }
-
-    window.location.reload()
   }
 
   useEffect(() => {

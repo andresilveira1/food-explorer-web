@@ -26,9 +26,9 @@ export function Favorites() {
 
     if (confirm) {
       await api.delete(`/favorites/${id}`)
-    }
 
-    window.location.reload()
+      window.location.reload()
+    }
   }
 
   useEffect(() => {
