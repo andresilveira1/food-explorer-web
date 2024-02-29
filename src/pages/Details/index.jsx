@@ -57,7 +57,7 @@ export function Details() {
     }
 
     handleRequest()
-  }, [])
+  }, [params.id])
 
   useEffect(() => {
     async function handleTag() {
