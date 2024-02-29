@@ -21,11 +21,11 @@ export function Header({ onOpenMenu }) {
   }
 
   useEffect(() => {
-    async function handleRequest() {
+    async function fetchPaymentData() {
       try {
-        const response = await api.get(`/payment/${user.id}`)
+        const paymentData = await api.get(`/payment/${user.id}`)
 
-        setRequest(response.data.length)
+        setRequest(paymentData.data.length)
       } catch (error) {
         if (error.response) {
           alert(error.response.data.message)
@@ -35,7 +35,7 @@ export function Header({ onOpenMenu }) {
       }
     }
 
-    handleRequest()
+    fetchPaymentData()
   }, [])
 
   return (
