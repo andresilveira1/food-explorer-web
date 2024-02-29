@@ -23,6 +23,7 @@ export function Payment() {
   const [total, setTotal] = useState('')
   const [currentTab, setCurrentTab] = useState('pix')
   const [menuIsOpen, setMenuIsOpen] = useState(false)
+  const [removeProduct, setRemoveProduct] = useState(false)
 
   const url = `${api.defaults.baseURL}/files/`
 
@@ -33,7 +34,7 @@ export function Payment() {
 
     if (confirm) {
       await api.delete(`/payment/${id}`)
-      window.location.reload()
+      setRemoveProduct(true)
     }
   }
 
@@ -50,8 +51,9 @@ export function Payment() {
       setOrder(response.data)
     }
 
+    setRemoveProduct(false)
     handleOrder()
-  }, [])
+  }, [removeProduct])
 
   return (
     <Container>
