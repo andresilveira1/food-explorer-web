@@ -15,6 +15,7 @@ import { Select } from '../../components/Select'
 import { SelectItem } from '../../components/Select/SelectItem'
 import { Textarea } from '../../components/Textarea'
 import { Footer } from '../../components/Footer'
+import { SideMenu } from '../../components/SideMenu'
 
 export function UpdateDish() {
   const [image, setImage] = useState('')
@@ -24,6 +25,8 @@ export function UpdateDish() {
   const [newIngredient, setNewIngredient] = useState('')
   const [price, setPrice] = useState('')
   const [description, setDescription] = useState('')
+
+  const [menuIsOpen, setMenuIsOpen] = useState(false)
 
   const params = useParams()
   const navigate = useNavigate()
@@ -144,7 +147,12 @@ export function UpdateDish() {
 
   return (
     <Container>
-      <Header />
+      <Header onOpenMenu={() => setMenuIsOpen(true)} />
+
+      <SideMenu
+        menuIsOpen={menuIsOpen}
+        onCloseMenu={() => setMenuIsOpen(false)}
+      />
 
       <div>
         <div>

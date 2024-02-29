@@ -15,6 +15,7 @@ import { Textarea } from '../../components/Textarea'
 import { Select } from '../../components/Select'
 import { DishItem } from '../../components/DishItem'
 import { SelectItem } from '../../components/Select/SelectItem'
+import { SideMenu } from '../../components/SideMenu'
 
 export function NewDish() {
   const [image, setImage] = useState('')
@@ -22,6 +23,8 @@ export function NewDish() {
   const [category, setCategory] = useState('')
   const [price, setPrice] = useState('')
   const [description, setDescription] = useState('')
+
+  const [menuIsOpen, setMenuIsOpen] = useState(false)
 
   const [ingredient, setIngredient] = useState([])
   const [newIngredient, setNewIngredient] = useState('')
@@ -76,7 +79,7 @@ export function NewDish() {
     }
 
     if (ingredient.length === 0) {
-      return alert('Adicione algum ingrediente ao produto.')
+      return alert('Adicione ao menos um ingrediente.')
     }
 
     if (!name || !description || !price) {
@@ -112,7 +115,12 @@ export function NewDish() {
 
   return (
     <Container>
-      <Header />
+      <Header onOpenMenu={() => setMenuIsOpen(true)} />
+
+      <SideMenu
+        menuIsOpen={menuIsOpen}
+        onCloseMenu={() => setMenuIsOpen(false)}
+      />
 
       <div>
         <div>
