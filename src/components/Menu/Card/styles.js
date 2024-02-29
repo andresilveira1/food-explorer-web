@@ -74,6 +74,12 @@ export const Container = styled.div`
 
   h2 {
     display: none;
+
+    width: 100%;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   p {
