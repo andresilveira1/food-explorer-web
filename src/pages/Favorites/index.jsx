@@ -14,6 +14,7 @@ import { Footer } from '../../components/Footer'
 export function Favorites() {
   const [menuIsOpen, setMenuIsOpen] = useState(false)
   const [data, setData] = useState([])
+  const [deleteFavorite, setDeleteFavorite] = useState(false)
 
   const { user } = useAuth()
 
@@ -26,8 +27,7 @@ export function Favorites() {
 
     if (confirm) {
       await api.delete(`/favorites/${id}`)
-
-      window.location.reload()
+      setDeleteFavorite(true)
     }
   }
 
@@ -38,8 +38,9 @@ export function Favorites() {
       setData(response.data)
     }
 
+    setDeleteFavorite(false)
     fetchFavorites()
-  }, [])
+  }, [deleteFavorite])
 
   return (
     <Container>
