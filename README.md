@@ -3,10 +3,10 @@
 A FrontEnd app build with Vite tool, and ReactJs as template. Food Explorer is a fictitious restaurant that need a authenticated user to interact with app functions. You can view a menu, and choose one or more options at your taste to buy or set as favorite. There is a payment page that you can see the total amount or remove some product if you want. As Admin you can add, edit and delete options to menu.
 
 <p align="center">
-  <a href="#-website">WebSite</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-layout">Layout</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-clone">Clone</a>&nbsp;&nbsp;&nbsp;
+  <a href="#website">WebSite</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#layout">Layout</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#clone">Clone</a>&nbsp;&nbsp;&nbsp;
 </p>
 
 ![preview](./.github/desktopPreview.png)
