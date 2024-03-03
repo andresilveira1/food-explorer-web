@@ -19,7 +19,7 @@ If you wanna see the app as Admin you can access this account.
 email: admin@email.com
 password: 123456
 
-### BackEnd repository: [Link](https://github.com/andresilveira1/food-explorer-web)
+### BackEnd repository: [Link](https://github.com/andresilveira1/food-explorer-api)
 
 # Technologies
 
