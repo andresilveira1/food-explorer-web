@@ -14,10 +14,12 @@ A FrontEnd app build with Vite tool, and ReactJs as template. Food Explorer is a
 
 ## [WebSite](https://foodexplorer1000.netlify.app/)
 
-If you wanna see the app as Admin you can access this login.
+If you wanna see the app as Admin you can access this account.
 
 email: admin@email.com
 password: 123456
+
+### BackEnd repository: [Link](https://github.com/andresilveira1/food-explorer-web)
 
 # Technologies
 
